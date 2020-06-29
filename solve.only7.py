@@ -1,21 +1,21 @@
-def isLen(num,l):
+def isLen(num,l): # this functions checks if the length of the num is same as l. Returns true and false accordingly
   return (len(str(num)) == l)
 
-def no7(num):
-  for i in str(num):
-    if i=="7":
-      return False
-  return True
-
-def only7(num,place):
+def only7(num,place): # this function checks if there is 7 in the num at units place 'place'. slightly a misnomer because previously was fitting for only 7 but now it is not worrying about other places.
   for nu, i in enumerate(str(num)):
     if (len(str(num))-nu)==place and i!="7":
       return False
   return True
 
-def longdiv(div, fac, D, Q, M, R):
+def longdiv(div, fac, D, Q, M, R): 
+  # this function performs the long division and at each step looks of the number meets the criteria of length and 7s presence in the right place
+  # needs a fac and a dividend as input
   dl = len(str(div))
   fl = len(str(fac))
+  #D stores the list of dividend at each step
+  #Q stores the list of quotient digits
+  #M stores the factor * quotient
+  #R stores remainders
   D.append(int(str(div)[:len(str(fac))]))
   if D[0]<fac:
     return
@@ -54,7 +54,9 @@ def longdiv(div, fac, D, Q, M, R):
         return
   print "SOLUTION", div, fac, D,Q,M,R
 
-
+#### this is like the main function where the script actually startes running.
+# this is basically a loop over all possible dividends and factors which clear the basic criteria of length, 7 in the right place and that they are 0 remainder pair
+# this calls the longdiv function above which checks if the given pair also clears the deeper constraints
 for fac in range(100070,999979):
   if only7(fac,2):
     temp_min = 1000000000/fac
